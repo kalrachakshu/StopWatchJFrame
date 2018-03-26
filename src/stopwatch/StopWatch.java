@@ -42,6 +42,7 @@ public class StopWatch {
         // TODO code application logic here
         
         Watch wt=new Watch();
+        wt.setTitle("Stopwatch ");
         wt.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
