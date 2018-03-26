@@ -259,6 +259,11 @@ public class Watch extends javax.swing.JFrame   {
     private void reset(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         list=new ArrayList<>();;
+        jLabel1.setText("00:00:000");
+        if(isPaused){
+        resms=System.currentTimeMillis(); 
+        pause();
+        }
                   startms=System.currentTimeMillis();
     }                                        
 
