@@ -165,6 +165,20 @@ public class Watch extends javax.swing.JFrame   {
         
     }//GEN-LAST:event_jButton1ActionPerformed
         
+    public void resetLap()
+    {
+          list=new ArrayList<>();;
+           String[] strings = new String[list.size()];
+            for(int i=0,j=strings.length-1;i<strings.length;i++,j--)
+            {
+                strings[i]=list.get(j);
+            }
+           
+           jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+    }
     public static boolean isRunning=false;
     public static boolean isPaused=false;
     public static int RUNNING=122,STOPPED=123;
@@ -176,6 +190,7 @@ public class Watch extends javax.swing.JFrame   {
       
         if(evt.getID()==ActionEvent.ACTION_PERFORMED)
         {
+            isPaused=false;
             System.out.println("Action Performed on START/STOP");
             
             if(STATE==RUNNING)
@@ -197,7 +212,7 @@ public class Watch extends javax.swing.JFrame   {
             }
             else{
                 
-                list=new ArrayList<>();;
+              
                 
                 STATE=RUNNING;
                 isRunning=true;
@@ -207,7 +222,7 @@ public class Watch extends javax.swing.JFrame   {
                 
                  timer=new Timer();
                  System.out.println("Create New Timer");
-            
+            resetLap();
             
                 timer.scheduleAtFixedRate(new TimerTask() {
                     @Override
@@ -257,10 +272,11 @@ public class Watch extends javax.swing.JFrame   {
             
 
     private void reset(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-        list=new ArrayList<>();;
+        // TODO add your handling code here: 
         jLabel1.setText("00:00:000");
+        
         if(isPaused){
+            
         resms=System.currentTimeMillis(); 
         pause();
         }
