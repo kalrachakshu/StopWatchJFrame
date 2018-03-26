@@ -34,6 +34,11 @@ public class Watch extends javax.swing.JFrame   {
                 reset(evt);
             }
         });
+          jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pause();
+            }
+        });
          
          
            jList1.setModel(new javax.swing.AbstractListModel<String>() {
@@ -85,6 +90,7 @@ public class Watch extends javax.swing.JFrame   {
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,6 +115,8 @@ public class Watch extends javax.swing.JFrame   {
 
         jButton2.setText("RESET");
 
+        jButton4.setText("PAUSE");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,8 +129,9 @@ public class Watch extends javax.swing.JFrame   {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -133,10 +142,12 @@ public class Watch extends javax.swing.JFrame   {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)))
                 .addContainerGap())
@@ -155,6 +166,7 @@ public class Watch extends javax.swing.JFrame   {
     }//GEN-LAST:event_jButton1ActionPerformed
         
     public static boolean isRunning=false;
+    public static boolean isPaused=false;
     public static int RUNNING=122,STOPPED=123;
     public static int STATE=STOPPED;
 
@@ -201,11 +213,14 @@ public class Watch extends javax.swing.JFrame   {
                     @Override
                     public void run() {
                     
+                        if(!isPaused){
+                            
+                        
                         Counter ct=new Counter(System.currentTimeMillis()-startms);
                        // jLabel1.setText(ct.getTimeString());
                         
                         jLabel1.setText(""+ct.getTimeString());
-                        
+                        }
                     }
                   }, 0, 10);
                 
@@ -220,7 +235,26 @@ public class Watch extends javax.swing.JFrame   {
     private void lap(java.awt.event.ActionEvent evt) {                                         
       lap();
     }                                        
+                                           
+    long resms;
+    private void pause(  ) {   
+     
+     if(isPaused)
+     {
+     
+      startms=resms;
+     jButton4.setText("PAUSE");                       
+     isPaused=false;
+     }
+     else{
+                    
+     resms=System.currentTimeMillis();    
+     jButton4.setText("RESUME");                       
+     isPaused=true;
+     }
+    }                                        
                          
+            
 
     private void reset(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
@@ -267,6 +301,7 @@ public class Watch extends javax.swing.JFrame   {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
