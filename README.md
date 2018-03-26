@@ -1,4 +1,4 @@
-##Simple Stopwatch with LAP and RESET ##
+## Simple Stopwatch with LAP and RESET ##
 
 
 Simple Stopwatch using LAP and RESET using JFrame .
