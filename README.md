@@ -3,5 +3,5 @@
 
 Simple Stopwatch using LAP and RESET using JFrame .
 
-![alt text](screenshots/scr1.png)
+![alt text](screenshots/scr2.png)
 
